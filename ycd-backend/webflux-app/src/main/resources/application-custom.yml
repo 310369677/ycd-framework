@@ -1,0 +1,22 @@
+#自定义的属性
+base:
+  common:
+    file_store_path: F:\frameworkDocument
+    swagger_enable: true
+    base_package: com.ycd
+    #用户登录模式 1代表一个人只能登录一次，再次登录会挤掉上一个登录的人 2代表可以一个账号可以多次登录
+    user_login_model: 1
+    #用户登录过期时间，单位是s
+    user_login_expire_time: 1800
+    #token模式的授权头
+    token_auth_head: auth
+    #app version
+    version: 1.0
+    api_document_title: api文档
+    api_document_desc: 应用接口文档
+  security:
+    anno_urls: /index,/security/noauth,/swagger/**,/webjars/**,/swagger-resources/**,/v2/api-docs,/*.html,/exception/**,/,/csrf,/document/download/**,/*.ico
+
+chat:
+  im:
+    port: 9332

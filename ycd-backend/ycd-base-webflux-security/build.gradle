@@ -1,0 +1,19 @@
+group 'com.ycd'
+version '0.0.1-SNAPSHOT'
+
+archivesBaseName = 'ycd-base-webflux-security'
+
+jar.enabled=true
+bootJar.enabled=false
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(":ycd-base-common")
+    compile project(":ycd-base-webflux-common")
+    compile 'org.springframework.boot:spring-boot-starter-security'
+}

@@ -1,0 +1,28 @@
+
+group 'com.ycd'
+version '1.0-SNAPSHOT'
+
+archivesBaseName = 'ycd-base-webflux-common'
+
+jar.enabled=true
+bootJar.enabled=false
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext{
+    swager_version="3.0.0-SNAPSHOT"
+}
+
+dependencies {
+    compile project(":ycd-base-common")
+    compile 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
+    compile "io.springfox:springfox-swagger2:${swager_version}"
+    compile "io.springfox:springfox-swagger-ui:${swager_version}"
+    compile "io.springfox:springfox-spring-webflux:${swager_version}"
+    compile "org.springframework.boot:spring-boot-starter-webflux"
+    compile "org.springframework.boot:spring-boot-starter-undertow"
+}

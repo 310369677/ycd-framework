@@ -1,0 +1,32 @@
+
+group 'com.yang'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+archivesBaseName = 'ycd-base-servlet-common'
+
+jar.enabled=true
+bootJar.enabled=false
+
+repositories {
+    mavenCentral()
+}
+
+ext{
+    servlet_api="4.0.1"
+    swager_version="3.0.0-SNAPSHOT"
+}
+
+dependencies {
+    compile project(":ycd-base-common")
+    compile "javax.servlet:javax.servlet-api:${servlet_api}"
+    compile 'org.springframework.boot:spring-boot-starter-data-redis'
+    compile ("org.springframework.boot:spring-boot-starter-web"){
+        exclude group:'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    compile "org.springframework.boot:spring-boot-starter-undertow"
+    compile "io.springfox:springfox-swagger2:${swager_version}"
+    compile "io.springfox:springfox-swagger-ui:${swager_version}"
+    compile "io.springfox:springfox-spring-webmvc:${swager_version}"
+}

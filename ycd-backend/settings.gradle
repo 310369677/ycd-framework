@@ -1,0 +1,9 @@
+rootProject.name = 'ycd-backend'
+include 'ycd-base-common'
+include 'ycd-base-servlet-common'
+include 'ycd-base-webflux-common'
+include 'ycd-base-servlet-security'
+include 'app'
+include 'ycd-base-webflux-security'
+include 'webflux-app'
+

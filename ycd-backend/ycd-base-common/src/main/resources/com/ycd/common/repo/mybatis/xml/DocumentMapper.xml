@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ycd.common.repo.mybatis.DocumentMapper">
+    <resultMap id="BaseResultMap" type="com.ycd.common.entity.Document">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="version" jdbcType="BIGINT" property="version"/>
+        <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
+        <result column="update_time" jdbcType="VARCHAR" property="updateTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="path" jdbcType="VARCHAR" property="path"/>
+        <result column="size" jdbcType="BIGINT" property="size"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="file_suffix" jdbcType="VARCHAR" property="fileSuffix"/>
+    </resultMap>
+
+    <select id="findDocumentByBusinessAndType" resultType="com.ycd.common.entity.Document">
+        select * from (select * from t_document t1
+        <if test="type!=null and type!=''">
+            where t1.`type`=#{type}
+        </if>
+        ) t3
+        inner join
+        (select * from t_document_mapping t2
+        <if test="businessId!=null and businessId!=''">
+            where t2.business_id=#{businessId}
+        </if>
+        ) t4
+        on t3.id=t4.document_id
+    </select>
+
+
+    <select id="findCurrentUserFileList" resultMap="BaseResultMap">
+        select *
+        from t_document t
+        where t.create_user_id = #{currentUserId}
+          and t.type != '10'
+    </select>
+</mapper>

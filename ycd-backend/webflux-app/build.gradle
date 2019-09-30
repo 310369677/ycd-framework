@@ -1,0 +1,19 @@
+
+group 'com.ycd'
+version '0.0.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+ext{
+    mysql_driver_version="5.1.46"
+}
+
+dependencies {
+    compile project (":ycd-base-common")
+    compile project (":ycd-base-webflux-common")
+    compile project (":ycd-base-webflux-security")
+    implementation "mysql:mysql-connector-java:${mysql_driver_version}"
+}

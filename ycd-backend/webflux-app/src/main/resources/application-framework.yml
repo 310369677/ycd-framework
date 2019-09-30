@@ -1,0 +1,21 @@
+spring:
+  devtools:
+    livereload:
+      port: ${random.int[30000,40000]}
+  profiles:
+    include: datasource,custom
+  main:
+    allow-bean-definition-overriding: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 1000MB
+  application:
+    name: ycdApp
+logging:
+  level:
+    root: info
+    org:
+      springframework: info
+    com:
+      ycd: debug

@@ -1,0 +1,20 @@
+
+group 'com.yang'
+version '1.0-SNAPSHOT'
+
+archivesBaseName = 'ycd-base-servlet-sercurity'
+
+jar.enabled=true
+bootJar.enabled=false
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(":ycd-base-common")
+    compile project(":ycd-base-servlet-common")
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+}
