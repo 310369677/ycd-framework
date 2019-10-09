@@ -1,5 +1,5 @@
 
-group 'com.yang'
+group 'com.ycd'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
@@ -16,6 +16,24 @@ repositories {
 ext{
     servlet_api="4.0.1"
     swager_version="3.0.0-SNAPSHOT"
+}
+
+artifacts {
+    archives bootJar
+}
+
+//上传到nexus
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: publishURL) {
+                authentication(userName: publishUserName, password: publishUserPassword)
+            }
+            pom.version = "$project.version"
+            pom.artifactId = "$archivesBaseName"
+            pom.groupId = "$project.group"
+        }
+    }
 }
 
 dependencies {

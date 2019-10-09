@@ -30,6 +30,12 @@ public class ServletSecurityBeanConfig {
 
 
     @Bean
+    public CodeController codeController() {
+        return new CodeController();
+    }
+
+
+    @Bean
     @ConditionalOnMissingBean(UserController.class)
     public UserController userController() {
         return new DefaultUserController();

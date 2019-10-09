@@ -17,7 +17,7 @@ base:
     userfilter: false
   security:
     anno_urls: /index,/security/noauth,/swagger/**,/webjars/**,/swagger-resources/**,/v2/api-docs,/*.html,/exception/**,/,/csrf,/document/download/**,/*.ico
-
+    open_code: true
 chat:
   im:
     port: 9332

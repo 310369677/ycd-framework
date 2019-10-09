@@ -57,13 +57,19 @@ public class ServletWebSecurityConfigurerAdapter extends WebSecurityConfigurerAd
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        HttpSecurity security = http.csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint)
                 .accessDeniedHandler(accessDeniedHandler)
                 .and().authorizeRequests()
-                .antMatchers(securityConfig.getAnnoUrls().split(",")).permitAll()
-                .anyRequest().authenticated().and()
+                .antMatchers(securityConfig.getAnnoUrls().split(",")).permitAll().and();
+
+        //验证码打开的话，这个请求直接可以匿名
+        if (securityConfig.isOpenCode()) {
+            security.authorizeRequests().antMatchers("/code/make").permitAll();
+        }
+
+        security.authorizeRequests().anyRequest().authenticated().and()
                 .formLogin()
                 .failureHandler(authenticationFailureHandler)
                 .successHandler(authenticationSuccessHandler)
@@ -72,7 +78,7 @@ public class ServletWebSecurityConfigurerAdapter extends WebSecurityConfigurerAd
                 .logout()
                 .logoutUrl(securityConfig.getLogOutUrl())
                 .logoutSuccessHandler(logoutSuccessHandler);
-        UserInfoFilter userInfoFilter=new UserInfoFilter();
+        UserInfoFilter userInfoFilter = new UserInfoFilter();
         userInfoFilter.setConfig(commonConfig);
         userInfoFilter.setRedisUserCache(redisUserCache);
         http.addFilterBefore(userInfoFilter, SecurityContextPersistenceFilter.class);

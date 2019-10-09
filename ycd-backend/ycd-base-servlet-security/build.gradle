@@ -1,5 +1,5 @@
 
-group 'com.yang'
+group 'com.ycd'
 version '1.0-SNAPSHOT'
 
 archivesBaseName = 'ycd-base-servlet-sercurity'
@@ -11,6 +11,24 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+}
+
+artifacts {
+    archives bootJar
+}
+
+//上传到nexus
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: publishURL) {
+                authentication(userName: publishUserName, password: publishUserPassword)
+            }
+            pom.version = "$project.version"
+            pom.artifactId = "$archivesBaseName"
+            pom.groupId = "$project.group"
+        }
+    }
 }
 
 dependencies {

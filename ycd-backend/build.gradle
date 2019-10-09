@@ -22,6 +22,7 @@ subprojects{
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'maven'
 
     sourceCompatibility = '1.8'
 
@@ -34,6 +35,15 @@ subprojects{
 
        /* all*.exclude group:'org.hsqldb', module: 'hsqldb'*/
 
+    }
+
+    ext{
+        //发布到仓库用户名
+        publishUserName = "admin"
+        //发布到仓库地址
+        publishUserPassword = "111111"
+        //仓库地址
+        publishURL="http://192.168.1.133:8081/repository/my-dev/"
     }
 
 

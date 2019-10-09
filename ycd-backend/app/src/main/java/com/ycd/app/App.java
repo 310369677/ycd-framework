@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
 
-@SpringBootApplication(scanBasePackages = "com.ycd")
 public class App extends YcdApplication {
 
     public static void main(String[] args) {

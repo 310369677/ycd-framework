@@ -1,6 +1,7 @@
 package com.ycd.servlet.security.security;
 
 
+import com.ycd.common.config.security.SecurityConfig;
 import com.ycd.common.entity.User;
 import com.ycd.common.entity.security.Menu;
 import com.ycd.common.entity.security.Role;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,12 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private HttpServletRequest request;
+
+    @Autowired
+    private SecurityConfig securityConfig;
 
     /**
      * 定义角色
@@ -67,6 +75,16 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        //如果验证码打开的话，就先验证验证码
+        if (securityConfig.isOpenCode()) {
+            //验证
+            String code = request.getParameter("code");
+            SimpleUtil.assertNotEmpty(code, "验证码不能为空");
+            String sessionCode = (String) request.getSession().getAttribute("code");
+            SimpleUtil.trueAndThrows(!code.equals(sessionCode), "验证码错误");
+        }
+
         User user = UserService.findUserByUserName(username);
         SimpleUtil.assertNotEmpty(user, "用户名不存在");
         SimpleUtil.trueAndThrows(LOCK_STATUS.equals(user.getStatus()), "用户已经被锁定");

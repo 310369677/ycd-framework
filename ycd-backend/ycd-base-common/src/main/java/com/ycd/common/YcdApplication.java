@@ -4,11 +4,13 @@ import com.ycd.common.util.SimpleUtil;
 import org.springframework.boot.ansi.AnsiColor;
 import org.springframework.boot.ansi.AnsiOutput;
 import org.springframework.boot.ansi.AnsiStyle;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import tk.mybatis.spring.annotation.MapperScan;
 
 
 @MapperScan(basePackages = {"com.ycd.common.repo.mybatis"})
+@SpringBootApplication(scanBasePackages = "com.ycd")
 public abstract class YcdApplication {
 
     protected static class YcdAppRunner extends SpringApplicationBuilder {

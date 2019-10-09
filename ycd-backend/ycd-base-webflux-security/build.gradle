@@ -12,6 +12,24 @@ repositories {
     mavenCentral()
 }
 
+artifacts {
+    archives bootJar
+}
+
+//上传到nexus
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: publishURL) {
+                authentication(userName: publishUserName, password: publishUserPassword)
+            }
+            pom.version = "$project.version"
+            pom.artifactId = "$archivesBaseName"
+            pom.groupId = "$project.group"
+        }
+    }
+}
+
 dependencies {
     compile project(":ycd-base-common")
     compile project(":ycd-base-webflux-common")
