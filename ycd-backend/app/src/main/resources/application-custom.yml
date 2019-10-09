@@ -17,7 +17,9 @@ base:
     userfilter: false
   security:
     anno_urls: /index,/security/noauth,/swagger/**,/webjars/**,/swagger-resources/**,/v2/api-docs,/*.html,/exception/**,/,/csrf,/document/download/**,/*.ico
-    open_code: true
+    open_code: false
+  gofastdfs:
+    upload_url: http://192.168.1.133:9999/group1/upload
 chat:
   im:
     port: 9332

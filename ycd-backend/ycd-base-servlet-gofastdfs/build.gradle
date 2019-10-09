@@ -1,13 +1,12 @@
-
-archivesBaseName = 'ycd-base-servlet-sercurity'
-
-jar.enabled=true
-bootJar.enabled=false
-
 sourceCompatibility = 1.8
+archivesBaseName = 'ycd-base-servlet-gofastdfs'
 
 repositories {
     mavenCentral()
+}
+
+ext{
+    okhttp_version="3.14.4"
 }
 
 artifacts {
@@ -31,5 +30,5 @@ uploadArchives {
 dependencies {
     compile project(":ycd-base-common")
     compile project(":ycd-base-servlet-common")
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation "com.squareup.okhttp3:okhttp:${okhttp_version}"
 }

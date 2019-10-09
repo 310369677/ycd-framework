@@ -19,8 +19,8 @@ public class GlobalThreadPool {
         return EXECUTOR_SERVICE.submit(new SafeRunnableProxy(task));
     }
 
-    public static void submit(Callable<?> task) {
-        EXECUTOR_SERVICE.submit(new SafeCallableProxy(task));
+    public static <T> Future<T> submit(Callable<T> task) {
+        return EXECUTOR_SERVICE.submit(new SafeCallableProxy(task));
     }
 
 
