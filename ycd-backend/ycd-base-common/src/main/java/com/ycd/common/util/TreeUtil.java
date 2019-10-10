@@ -28,7 +28,7 @@ public class TreeUtil {
          *
          * @return 孩子的列表
          */
-        List<? extends TreeNode> children();
+        <T extends TreeNode> List<T> children();
 
         /**
          * 是否为叶子节点
@@ -55,7 +55,7 @@ public class TreeUtil {
         boolean hasChildren = false;
         for (T t : wrapList) {
             if (head.nodeId().equals(t.parentId())) {
-                List list = head.children();
+                List<T> list = head.children();
                 list.add(t);
                 wrapList.remove(t);
                 hasChildren = true;
@@ -67,9 +67,10 @@ public class TreeUtil {
         if (SimpleUtil.isNotEmpty(comparator)) {
             head.children().sort(comparator);
         }
+        List<T> childrenList = head.children();
         //链接孩子
-        for (TreeNode childTreeNode : head.children()) {
-            makeTree((T) childTreeNode, wrapList, comparator);
+        for (T childTreeNode : childrenList) {
+            makeTree(childTreeNode, wrapList, comparator);
         }
     }
 
@@ -84,9 +85,9 @@ public class TreeUtil {
         if (findId.equals(head.nodeId())) {
             return head;
         }
+        List<T> childrenList = head.children();
         //从孩子查找
-        for (Object param : head.children()) {
-            T child = (T) param;
+        for (T child : childrenList) {
             T result = findNode(child, findId);
             if (SimpleUtil.isNotEmpty(result)) {
                 return result;
@@ -108,9 +109,9 @@ public class TreeUtil {
         if (SimpleUtil.isNotEmpty(head)) {
             result.add(head);
         }
+        List<T> childrenList = head.children();
         //将孩子增加进去
-        for (Object childParam : head.children()) {
-            T child = (T) childParam;
+        for (T child : childrenList) {
             result.addAll(convert2List(child));
         }
         return result;

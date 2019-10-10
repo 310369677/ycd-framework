@@ -11,8 +11,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class SyncTaskExecutor {
 
-    Map<String, Callable<?>> callableMap = new ConcurrentHashMap<>();
-    Map<String, Runnable> runnableMap = new ConcurrentHashMap<>();
+    private Map<String, Callable<?>> callableMap = new ConcurrentHashMap<>();
+    private Map<String, Runnable> runnableMap = new ConcurrentHashMap<>();
 
     /**
      * 提交任务
