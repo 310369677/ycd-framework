@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.ycd.servlet.security.config.ServletSecurityBeanConfig,\
+  com.ycd.servlet.security.config.ServletWebSecurityConfigurerAdapter

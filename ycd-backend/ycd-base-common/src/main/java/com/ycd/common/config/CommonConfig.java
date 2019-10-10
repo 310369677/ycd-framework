@@ -1,7 +1,6 @@
 package com.ycd.common.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 @ConfigurationProperties(prefix = "base.common")
 public class CommonConfig {
@@ -9,17 +8,16 @@ public class CommonConfig {
 
     private String fileStorePath = "~/document";
 
-    private String authHeader = "auth";
 
-    private String basePackage = "com.ycd";
+    private String swaggerScanBasePackage = "com.ycd";
 
     private boolean swaggerEnable = false;
 
-    private String apiDocumentTitle = "api文档";
+    private String swaggerApiDocumentTitle = "api文档";
 
-    private String apiDocumentDesc = "应用接口文档";
+    private String swaggerApiDocumentDesc = "应用接口文档";
 
-    private String version = "unknowned";
+    private String swaggerApiVersion = "unknowned";
 
 
     private String userLoginModel = "2";
@@ -37,21 +35,6 @@ public class CommonConfig {
         this.fileStorePath = fileStorePath;
     }
 
-    public String getAuthHeader() {
-        return authHeader;
-    }
-
-    public void setAuthHeader(String authHeader) {
-        this.authHeader = authHeader;
-    }
-
-    public String getBasePackage() {
-        return basePackage;
-    }
-
-    public void setBasePackage(String basePackage) {
-        this.basePackage = basePackage;
-    }
 
     public boolean isSwaggerEnable() {
         return swaggerEnable;
@@ -61,30 +44,30 @@ public class CommonConfig {
         this.swaggerEnable = swaggerEnable;
     }
 
-    public String getVersion() {
-        return version;
+
+    public String getSwaggerApiDocumentTitle() {
+        return swaggerApiDocumentTitle;
     }
 
-    public void setVersion(String version) {
-        this.version = version;
+    public void setSwaggerApiDocumentTitle(String swaggerApiDocumentTitle) {
+        this.swaggerApiDocumentTitle = swaggerApiDocumentTitle;
     }
 
-    public String getApiDocumentTitle() {
-        return apiDocumentTitle;
+    public String getSwaggerApiDocumentDesc() {
+        return swaggerApiDocumentDesc;
     }
 
-    public void setApiDocumentTitle(String apiDocumentTitle) {
-        this.apiDocumentTitle = apiDocumentTitle;
+    public void setSwaggerApiDocumentDesc(String swaggerApiDocumentDesc) {
+        this.swaggerApiDocumentDesc = swaggerApiDocumentDesc;
     }
 
-    public String getApiDocumentDesc() {
-        return apiDocumentDesc;
+    public String getSwaggerApiVersion() {
+        return swaggerApiVersion;
     }
 
-    public void setApiDocumentDesc(String apiDocumentDesc) {
-        this.apiDocumentDesc = apiDocumentDesc;
+    public void setSwaggerApiVersion(String swaggerApiVersion) {
+        this.swaggerApiVersion = swaggerApiVersion;
     }
-
 
     public String getUserLoginModel() {
         return userLoginModel;
@@ -108,5 +91,14 @@ public class CommonConfig {
 
     public void setTokenAuthHead(String tokenAuthHead) {
         this.tokenAuthHead = tokenAuthHead;
+    }
+
+
+    public String getSwaggerScanBasePackage() {
+        return swaggerScanBasePackage;
+    }
+
+    public void setSwaggerScanBasePackage(String swaggerScanBasePackage) {
+        this.swaggerScanBasePackage = swaggerScanBasePackage;
     }
 }

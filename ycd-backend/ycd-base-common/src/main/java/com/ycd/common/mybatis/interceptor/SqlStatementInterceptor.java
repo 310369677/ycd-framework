@@ -1,4 +1,4 @@
-package com.yld.common.common.mybatis.interceptor;
+package com.ycd.common.mybatis.interceptor;
 
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
@@ -27,7 +27,6 @@ import java.util.regex.Matcher;
         @Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class}),
         @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class, CacheKey.class, BoundSql.class}),
         @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class})})
-@Component
 public class SqlStatementInterceptor implements Interceptor {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());

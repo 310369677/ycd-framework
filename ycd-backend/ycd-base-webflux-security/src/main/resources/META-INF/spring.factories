@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.ycd.webflux.security.config.ReactiveSecurityBeanConfig,\
+  com.ycd.webflux.security.security.WebFluxSecurityConfig

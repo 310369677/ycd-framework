@@ -20,7 +20,6 @@ import java.util.Properties;
                 args = {MappedStatement.class,
                         Object.class}),
 })
-@Component
 public class ExecutorInterceptor implements Interceptor {
     @Override
     public Object intercept(Invocation invocation) throws Throwable {

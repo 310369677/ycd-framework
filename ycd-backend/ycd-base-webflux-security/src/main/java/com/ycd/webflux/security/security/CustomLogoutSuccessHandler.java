@@ -33,7 +33,7 @@ public class CustomLogoutSuccessHandler implements ServerLogoutSuccessHandler {
             //清空上下文，并且让token失效
             SecurityContextHolder.clearContext();
             //让token失效,获取token
-            String token = exchange.getExchange().getRequest().getHeaders().getFirst(commonConfig.getAuthHeader());
+        String token = exchange.getExchange().getRequest().getHeaders().getFirst(commonConfig.getTokenAuthHead());
             return userCache.clearCacheByToken(token).flatMap(b -> {
                 logger.debug("token:{}清空", token);
                 //回写成功的信息

@@ -1,0 +1,6 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.ycd.webflux.common.config.EnableWebFluxConfig,\
+  com.ycd.webflux.common.config.Swagger2,\
+  com.ycd.webflux.common.config.PlatformWebFluxConfigurationSupport,\
+  com.ycd.webflux.common.config.WebFluxBeanManager,\
+  com.ycd.webflux.common.aop.WebFluxTransactionalSupportAop

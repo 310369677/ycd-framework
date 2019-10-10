@@ -43,4 +43,5 @@ dependencies {
     compile "io.springfox:springfox-spring-webflux:${swager_version}"
     compile "org.springframework.boot:spring-boot-starter-webflux"
     compile "org.springframework.boot:spring-boot-starter-undertow"
+    annotationProcessor  "org.springframework.boot:spring-boot-configuration-processor"
 }

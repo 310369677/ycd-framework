@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.ycd.servlet.common.config.MvcBeanConfig,\
+  com.ycd.servlet.common.config.ServletSwagger2

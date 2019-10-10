@@ -27,7 +27,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.servlet.Filter;
 
@@ -44,19 +43,6 @@ public class MvcBeanConfig {
         return new PageFilter();
     }
 
-
-    /**
-     * 设置用户过滤器
-     */
-    @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
-    @ConditionalOnProperty(prefix = "base.common",name = "userfilter",havingValue = "true")
-    public UserInfoFilter userInfoFilter(CommonConfig commonConfig, RedisUserCache redisUserCache) {
-        UserInfoFilter userInfoFilter = new UserInfoFilter();
-        userInfoFilter.setConfig(commonConfig);
-        userInfoFilter.setRedisUserCache(redisUserCache);
-        return userInfoFilter;
-    }
 
     @Bean
     public DocumentController documentController() {

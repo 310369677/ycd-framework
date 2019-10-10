@@ -31,5 +31,6 @@ uploadArchives {
 dependencies {
     compile project(":ycd-base-common")
     compile project(":ycd-base-servlet-common")
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    annotationProcessor  "org.springframework.boot:spring-boot-configuration-processor"
 }
