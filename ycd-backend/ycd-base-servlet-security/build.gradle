@@ -14,6 +14,17 @@ artifacts {
     archives bootJar
 }
 
+jar {
+    //设置mainfest
+    manifest {
+        attributes 'Implementation-Title': "$archivesBaseName"
+        attributes 'Implementation-Version': "$project.version"
+        attributes 'Build-Jdk-Spec': "1.8"
+        attributes "Automatic-Module-Name" : "$archivesBaseName"
+        attributes "Built-By" : "ycd"
+    }
+}
+
 //上传到nexus
 uploadArchives {
     repositories {

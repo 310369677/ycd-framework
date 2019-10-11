@@ -17,6 +17,17 @@ ext{
     swager_version="3.0.0-SNAPSHOT"
 }
 
+jar {
+    //设置mainfest
+    manifest {
+        attributes 'Implementation-Title': "$archivesBaseName"
+        attributes 'Implementation-Version': "$project.version"
+        attributes 'Build-Jdk-Spec': "1.8"
+        attributes "Automatic-Module-Name" : "$archivesBaseName"
+        attributes "Built-By" : "ycd"
+    }
+}
+
 artifacts {
     archives bootJar
 }

@@ -10,7 +10,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 public class App extends YcdApplication {
 
     public static void main(String[] args) {
-        YcdApplication.of(App.class,"1.0").web(WebApplicationType.SERVLET).run(args);
+        YcdApplication.of(App.class).web(WebApplicationType.SERVLET).run(args);
         //new SpringApplicationBuilder(App.class).web(WebApplicationType.SERVLET).run(args);
     }
 }

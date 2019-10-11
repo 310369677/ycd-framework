@@ -13,6 +13,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHandler {
 
@@ -22,8 +24,12 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         SecurityUserDetails securityUserDetails = (SecurityUserDetails) authentication.getPrincipal();
-        //生成token TODO 具体生成token一会实现
+        //生成token
         String token = redisUserCache.cache(securityUserDetails);
-        HttpServletResponseUtil.writeEntityInfo(response, Result.ok(token));
+        Map<String, Object> result = new HashMap<>();
+        result.putIfAbsent("token", token);
+        securityUserDetails.setPassword(null);
+        result.putIfAbsent("user", securityUserDetails);
+        HttpServletResponseUtil.writeEntityInfo(response, Result.ok(result));
     }
 }

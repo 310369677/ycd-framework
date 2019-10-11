@@ -11,6 +11,9 @@ import org.springframework.security.web.server.WebFilterExchange;
 import org.springframework.security.web.server.authentication.ServerAuthenticationSuccessHandler;
 import reactor.core.publisher.Mono;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 处理授权成功的处理器
  */
@@ -28,7 +31,14 @@ public class AuthSuccessHandler implements ServerAuthenticationSuccessHandler {
         Mono<String> tokenM = reactiveRedisUserCache.cache(securityUserDetails);
         return tokenM
                 .switchIfEmpty(Mono.error(new BusinessException("生成token失败")))
-                .flatMap(token -> ResponseUtil.writeEntityInfo(response, Result.ok(token)))
+                .flatMap(token -> {
+                            Map<String, Object> result = new HashMap<>();
+                            result.putIfAbsent("token", token);
+                            securityUserDetails.setPassword(null);
+                            result.putIfAbsent("user", securityUserDetails);
+                            return ResponseUtil.writeEntityInfo(response, Result.ok(result));
+                        }
+                )
                 .onErrorResume(e -> ResponseUtil.writeException(response, e));
     }
 }

@@ -27,6 +27,17 @@ uploadArchives {
     }
 }
 
+jar {
+    //设置mainfest
+    manifest {
+        attributes 'Implementation-Title': "$archivesBaseName"
+        attributes 'Implementation-Version': "$project.version"
+        attributes 'Build-Jdk-Spec': "1.8"
+        attributes "Automatic-Module-Name" : "$archivesBaseName"
+        attributes "Built-By" : "ycd"
+    }
+}
+
 dependencies {
     compile project(":ycd-base-common")
     compile project(":ycd-base-servlet-common")
