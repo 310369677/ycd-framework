@@ -148,6 +148,7 @@ public class WebFluxBeanManager {
 
 
     @Bean
+    @Order(-2)
     public GlobleErrorWebException globleErrorWebException(ResourceProperties resourceProperties, ApplicationContext applicationContext) {
         return new GlobleErrorWebException(new GlobalErrorAttributes(), resourceProperties, applicationContext);
     }

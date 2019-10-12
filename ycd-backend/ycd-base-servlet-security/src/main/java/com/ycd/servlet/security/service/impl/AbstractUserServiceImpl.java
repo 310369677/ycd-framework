@@ -7,6 +7,7 @@ import com.ycd.common.entity.User;
 import com.ycd.common.util.SimpleUtil;
 import com.ycd.servlet.common.cache.RedisUserCache;
 import com.ycd.servlet.common.service.impl.AbstractServiceWithCreateEntity;
+import com.ycd.servlet.security.entity.SecurityUserDetails;
 import com.ycd.servlet.security.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,12 +27,22 @@ public class AbstractUserServiceImpl<T extends User> extends AbstractServiceWith
     @Autowired
     RedisUserCache redisUserCache;
 
+    private static final String LOCK_STATUS = "2";
+
     @Override
     public T findUserByUserName(String userName) {
         SimpleUtil.assertNotEmpty(userName, "用户名不能为空");
         T user = newEntityInstance();
         user.setUserName(userName);
         return mapper.selectOne(user);
+    }
+
+    @Override
+    public SecurityUserDetails loadUserByUsername(String userName) {
+        User user = findUserByUserName(userName);
+        SimpleUtil.assertNotEmpty(user, "用户名不存在");
+        SimpleUtil.trueAndThrows(LOCK_STATUS.equals(user.getStatus()), "用户已经被锁定");
+        return new SecurityUserDetails(user);
     }
 
     @Override

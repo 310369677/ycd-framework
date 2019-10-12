@@ -38,7 +38,7 @@ public class ReactiveTransactionTemplate extends DefaultTransactionDefinition
         this.transactionManager = transactionManager;
     }
 
-    private Scheduler pool = Schedulers.newElastic("T_X");
+    private Scheduler pool = Schedulers.newElastic("T-X");
 
 
     /**

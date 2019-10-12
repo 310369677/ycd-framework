@@ -8,6 +8,7 @@ import com.ycd.common.exception.TokenInvalidException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -25,7 +26,7 @@ public class HttpServletResponseUtil {
     public static void writeEntityInfo(HttpServletResponse response, Object data) {
         Objects.requireNonNull(data);
         response.setStatus(HttpStatus.OK.value());
-        response.addHeader("Content-type", "text/html;charset=UTF-8");
+        response.addHeader("Content-type", MediaType.APPLICATION_JSON_UTF8_VALUE);
         byte[] resultBytes = JSON.toJSONString(data).getBytes(StandardCharsets.UTF_8);
         try {
             response.getOutputStream().write(resultBytes);
@@ -37,7 +38,7 @@ public class HttpServletResponseUtil {
     public static void writeException(HttpServletResponse response, Throwable e) {
         String message = "服务器内部异常";
         response.setStatus(HttpStatus.OK.value());
-        response.addHeader("Content-type", "text/html;charset=UTF-8");
+        response.addHeader("Content-type", MediaType.APPLICATION_JSON_UTF8_VALUE);
         if (e instanceof BusinessException) {
             message = e.getMessage();
             byte[] resultBytes = JSON.toJSONString(Result.error(message)).getBytes(StandardCharsets.UTF_8);

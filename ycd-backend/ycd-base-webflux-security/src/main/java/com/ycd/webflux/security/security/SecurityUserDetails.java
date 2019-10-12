@@ -1,7 +1,8 @@
 package com.ycd.webflux.security.security;
 
 
-
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ycd.common.entity.User;
 import com.ycd.common.entity.security.Role;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,6 +30,7 @@ public class SecurityUserDetails extends User implements UserDetails {
     }
 
     @Override
+    @JSONField(serialize = false)
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
         List<Role> roles = this.getRoleList();
@@ -41,6 +43,7 @@ public class SecurityUserDetails extends User implements UserDetails {
     }
 
     @Override
+    @JSONField(serialize = false)
     public String getUsername() {
         return this.getUserName();
     }
@@ -51,6 +54,7 @@ public class SecurityUserDetails extends User implements UserDetails {
      * @return
      */
     @Override
+    @JSONField(serialize = false)
     public boolean isAccountNonExpired() {
         return true;
     }
@@ -61,6 +65,7 @@ public class SecurityUserDetails extends User implements UserDetails {
      * @return
      */
     @Override
+    @JSONField(serialize = false)
     public boolean isAccountNonLocked() {
         return true;
     }
@@ -71,6 +76,7 @@ public class SecurityUserDetails extends User implements UserDetails {
      * @return
      */
     @Override
+    @JSONField(serialize = false)
     public boolean isCredentialsNonExpired() {
         return true;
     }
@@ -81,6 +87,7 @@ public class SecurityUserDetails extends User implements UserDetails {
      * @return
      */
     @Override
+    @JSONField(serialize = false)
     public boolean isEnabled() {
         return true;
     }

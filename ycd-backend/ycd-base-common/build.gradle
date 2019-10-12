@@ -18,6 +18,7 @@ ext{
     swagger_annotation_version="1.5.22"
     mybatis_pagehelper="1.2.3"
     swager_version="3.0.0-SNAPSHOT"
+    poi_version="3.14"
 }
 
 artifacts {
@@ -71,5 +72,6 @@ dependencies {
     compile "io.swagger:swagger-models:${swagger_annotation_version}"
     compile "io.springfox:springfox-swagger2:${swager_version}"
     compile "io.springfox:springfox-swagger-ui:${swager_version}"
+    compile "org.apache.poi:poi-ooxml:${poi_version}"
     annotationProcessor  "org.springframework.boot:spring-boot-configuration-processor"
 }

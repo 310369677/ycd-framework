@@ -4,6 +4,7 @@ package com.ycd.webflux.security.service.interfaces;
 
 import com.ycd.common.entity.User;
 import com.ycd.webflux.common.service.interfaces.LongPriReactiveService;
+import org.springframework.security.core.userdetails.UserDetails;
 import reactor.core.publisher.Mono;
 
 public interface ReactiveUserService<T extends User> extends LongPriReactiveService<T> {
@@ -15,6 +16,8 @@ public interface ReactiveUserService<T extends User> extends LongPriReactiveServ
      * @return null 或者查找到的用户
      */
     Mono<T> findUserByUserName(String userName);
+
+    Mono<UserDetails> findByUsername(String userName);
 
     /**
      * 保存用户

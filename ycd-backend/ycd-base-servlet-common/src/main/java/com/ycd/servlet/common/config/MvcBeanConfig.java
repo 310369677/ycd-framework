@@ -9,6 +9,7 @@ import com.ycd.servlet.common.cache.RedisUserCache;
 import com.ycd.servlet.common.cache.UserCacheProxy;
 import com.ycd.servlet.common.cache.UserMultiLoginCache;
 import com.ycd.servlet.common.cache.UserSingleLoginCache;
+import com.ycd.servlet.common.exception.handle.GlobalExceptionHandler;
 import com.ycd.servlet.common.filter.PageFilter;
 import com.ycd.servlet.common.service.impl.DicServiceImpl;
 import com.ycd.servlet.common.service.impl.DocumentMappingServiceImpl;
@@ -93,6 +94,11 @@ public class MvcBeanConfig {
         simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
         mapper.registerModule(simpleModule);
         return new MappingJackson2HttpMessageConverter(mapper);
+    }
+
+    @Bean
+    public GlobalExceptionHandler globalExceptionHandler() {
+        return new GlobalExceptionHandler();
     }
 
 

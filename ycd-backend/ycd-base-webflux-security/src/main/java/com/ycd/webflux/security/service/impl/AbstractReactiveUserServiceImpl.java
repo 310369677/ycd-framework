@@ -1,7 +1,6 @@
 package com.ycd.webflux.security.service.impl;
 
 
-
 import com.ycd.common.constant.BooleanEnum;
 import com.ycd.common.entity.AbstractEntity;
 import com.ycd.common.entity.User;
@@ -9,8 +8,10 @@ import com.ycd.common.util.SimpleUtil;
 import com.ycd.webflux.common.cache.ReactiveRedisUserCache;
 import com.ycd.webflux.common.reactivetransaction.WebFluxTransactional;
 import com.ycd.webflux.common.service.impl.AbstractReactiveServiceWithCreateEntity;
+import com.ycd.webflux.security.security.SecurityUserDetails;
 import com.ycd.webflux.security.service.interfaces.ReactiveUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -25,6 +26,9 @@ public class AbstractReactiveUserServiceImpl<T extends User> extends AbstractRea
     @Autowired
     ReactiveRedisUserCache reactiveRedisUserCache;
 
+
+    private static final String LOCK_STATUS = "2";
+
     @Override
     public Mono<T> findUserByUserName(String userName) {
         return Mono.fromCallable(() -> {
@@ -36,11 +40,21 @@ public class AbstractReactiveUserServiceImpl<T extends User> extends AbstractRea
     }
 
     @Override
+    public Mono<UserDetails> findByUsername(String userName) {
+        return findUserByUserName(userName).map(user -> {
+            SimpleUtil.assertNotEmpty(user, "用户名不存在");
+            SimpleUtil.trueAndThrows(LOCK_STATUS.equals(user.getStatus()), "用户已经被锁定");
+            return new SecurityUserDetails(user);
+        });
+    }
+
+    @Override
     @WebFluxTransactional
     public Mono<Long> saveUser(T user) {
         user.setStatus(BooleanEnum.NO.code());
         return Mono.defer(() -> beforeSaveUser(user)).map(Void -> user)
                 .switchIfEmpty(Mono.just(user)).flatMap(us -> {
+                    SimpleUtil.assertNotEmpty(user.getUserName(), "用户名不能为空");
                     //校验用户名
                     T instance = newEntityInstance();
                     instance.setUserName(us.getUserName());

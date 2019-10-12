@@ -4,6 +4,7 @@ package com.ycd.servlet.security.service.interfaces;
 
 import com.ycd.common.entity.User;
 import com.ycd.servlet.common.service.interfaces.LongPriService;
+import com.ycd.servlet.security.entity.SecurityUserDetails;
 
 import java.util.List;
 
@@ -17,6 +18,14 @@ public interface UserService<T extends User> extends LongPriService<T> {
      */
     T findUserByUserName(String userName);
 
+
+    /**
+     * 根据用户名,得到安全用户的信息，可重写此方法，从而达到返回的用户信息的定制化需求
+     *
+     * @param userName 用户名
+     * @return 安全用户
+     */
+    SecurityUserDetails loadUserByUsername(String userName);
 
     /**
      * 保存用户
