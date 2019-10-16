@@ -25,9 +25,7 @@ public abstract class AbstractService<ID, T extends Entity<ID>> implements Servi
     @Override
     @Transactional
     public ID save(T t) {
-        if (SimpleUtil.isEmpty(t)) {
-            return null;
-        }
+        SimpleUtil.assertNotEmpty(t, "对象不能为空");
         int count = mapper.insertSelective(t);
         return count > 0 ? t.id() : null;
 

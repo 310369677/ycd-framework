@@ -1,7 +1,6 @@
 package com.ycd.common.util.excel;
 
 
-import com.ycd.common.util.SimpleUtil;
 import com.ycd.common.util.excel.adapter.ReadSheetMapperAdapter;
 import com.ycd.common.util.excel.adapter.WriteSheetMapperAdapter;
 import com.ycd.common.util.excel.adapter.WriteWorkBookMapperAdapter;
@@ -10,9 +9,7 @@ import com.ycd.common.util.excel.interfaces.ReadSheetMapper;
 import com.ycd.common.util.excel.interfaces.WriteRowMapper;
 import com.ycd.common.util.excel.interfaces.WriteSheetMapper;
 import com.ycd.common.util.excel.interfaces.WriteWorkBookMapper;
-import io.swagger.models.auth.In;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -261,6 +258,10 @@ public class ExcelUtil {
     public static void main(String[] args) throws IOException {
 
         File file = new File("C:\\Users\\Administrator\\Desktop\\2019.9行政区划代码.xlsx");
+        File target = new File("d:\\area.txt");
+        if (!target.exists()) {
+            target.createNewFile();
+        }
         Map<String, String> area = new HashMap<>();
         Map<String, List> result = ExcelUtil.readExcel(file, new ReadSheetMapperAdapter());
         Map<Integer, Map<Short, String>> data = new HashMap<>();
@@ -280,11 +281,18 @@ public class ExcelUtil {
             i++;
             int j = 0;
             while (j <= 4) {
-                area.putIfAbsent(row.get((short) (j + 1)), row.get((short) j));
+                area.putIfAbsent(row.get((short) (j)), row.get((short) (j + 1)));
                 j += 2;
             }
         }
         System.out.println(area);
+        Writer writer = new FileWriter(target);
+        for (Map.Entry<String, String> entry : area.entrySet()) {
+            String key = entry.getKey();
+            String val = entry.getValue();
+            writer.write(key + "=" + val + "\n");
+        }
+        writer.close();
         /*    File file=new File("d:/testNew.xls");
         if(!file.exists()){
             file.createNewFile();

@@ -6,24 +6,51 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class CommonConfig {
 
 
+    /**
+     * 本机存储时，文档的存储路劲
+     */
+
     private String fileStorePath = "~/document";
 
 
+    /**
+     * swagger扫描的基础包，可以用逗号分隔
+     */
     private String swaggerScanBasePackage = "com.ycd";
 
+    /**
+     * swagger文档是否可见
+     */
     private boolean swaggerEnable = false;
 
+    /**
+     * swaggerApi文档标题
+     */
     private String swaggerApiDocumentTitle = "api文档";
 
+    /**
+     * swaggerApi文档的描述
+     */
     private String swaggerApiDocumentDesc = "应用接口文档";
 
+    /**
+     * swaggerApi的版本
+     */
     private String swaggerApiVersion = "unknowned";
 
-
+    /**
+     * 用户登录模型
+     */
     private String userLoginModel = "2";
 
+    /**
+     * 用户登录过期时间，单位是s
+     */
     private Long userLoginExpireTime = 1800L;
 
+    /**
+     * 授权头中，token的key值
+     */
     private String tokenAuthHead = "auth";
 
 

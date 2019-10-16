@@ -6,10 +6,19 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class SecurityConfig {
 
 
+    /**
+     * 匿名url,可以用逗号分隔
+     */
     private String annoUrls = "/**";
 
+    /**
+     * 登录url
+     */
     private String loginUrl = "/login";
 
+    /**
+     * 登出url
+     */
     private String logOutUrl = "/logout";
 
     /**

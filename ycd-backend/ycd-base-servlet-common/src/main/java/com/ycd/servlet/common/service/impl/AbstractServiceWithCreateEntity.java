@@ -30,9 +30,7 @@ public abstract class AbstractServiceWithCreateEntity<T extends AbstractEntity> 
 
     @Override
     public T update(T t) {
-        if (SimpleUtil.isEmpty(t) || SimpleUtil.isEmpty(t.id())) {
-            return null;
-        }
+        SimpleUtil.trueAndThrows(SimpleUtil.isEmpty(t) || SimpleUtil.isEmpty(t.id()), "对象或则id不能为空");
         //查询出原对象
         T data = mapper.selectByPrimaryKey(t.id());
         //创建example
