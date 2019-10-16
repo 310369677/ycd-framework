@@ -3,7 +3,7 @@ spring:
     livereload:
       port: ${random.int[30000,40000]}
   profiles:
-    include: datasource,custom
+    include: datasource,custom,activiti
   main:
     allow-bean-definition-overriding: true
   servlet:
@@ -12,6 +12,8 @@ spring:
       max-request-size: 1000MB
   application:
     name: ycdApp
+  autoconfigure:
+    exclude: org.activiti.spring.boot.JpaProcessEngineAutoConfiguration,org.activiti.spring.boot.SecurityAutoConfiguration
 logging:
   level:
     root: info

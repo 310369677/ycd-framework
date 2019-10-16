@@ -7,4 +7,5 @@ include 'app'
 include 'ycd-base-webflux-security'
 include 'webflux-app'
 include 'ycd-base-servlet-gofastdfs'
+include 'ycd-base-servlet-activiti'
 

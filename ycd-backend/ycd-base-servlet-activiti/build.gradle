@@ -1,0 +1,52 @@
+sourceCompatibility = 1.8
+
+
+archivesBaseName = 'ycd-base-servlet-activiti'
+
+jar.enabled = true
+bootJar.enabled = false
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    mysql_driver_version = "5.1.46"
+    activiti_version = "6.0.0"
+}
+
+
+jar {
+    //设置mainfest
+    manifest {
+        attributes 'Implementation-Title': "$archivesBaseName"
+        attributes 'Implementation-Version': "$project.version"
+        attributes 'Build-Jdk-Spec': "1.8"
+        attributes "Automatic-Module-Name": "$archivesBaseName"
+        attributes "Built-By": "ycd"
+    }
+}
+
+artifacts {
+    archives bootJar
+}
+
+//上传到nexus
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: publishURL) {
+                authentication(userName: publishUserName, password: publishUserPassword)
+            }
+            pom.version = "$project.version"
+            pom.artifactId = "$archivesBaseName"
+            pom.groupId = "$project.group"
+        }
+    }
+}
+
+dependencies {
+    compile project(":ycd-base-common")
+    compile project(":ycd-base-servlet-common")
+    compile "org.activiti:activiti-spring-boot-starter-basic:${activiti_version}"
+}
