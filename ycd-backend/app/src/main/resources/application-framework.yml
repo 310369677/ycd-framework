@@ -13,7 +13,7 @@ spring:
   application:
     name: ycdApp
   autoconfigure:
-    exclude: org.activiti.spring.boot.JpaProcessEngineAutoConfiguration,org.activiti.spring.boot.SecurityAutoConfiguration
+    exclude: org.activiti.spring.boot.SecurityAutoConfiguration
 logging:
   level:
     root: info

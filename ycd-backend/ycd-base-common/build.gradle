@@ -57,7 +57,9 @@ dependencies {
     //fastjson
     compile "com.alibaba:fastjson:${fastjson_version}"
     //mybatis
-    compile "tk.mybatis:mapper-spring-boot-starter:${tk_mybatis_starter}"
+    compile ("tk.mybatis:mapper-spring-boot-starter:${tk_mybatis_starter}"){
+        exclude group:'javax.persistence', module: 'persistence-api'
+    }
     compile "com.github.pagehelper:pagehelper-spring-boot-starter:${mybatis_pagehelper}"
 
 

@@ -49,4 +49,5 @@ dependencies {
     compile project(":ycd-base-common")
     compile project(":ycd-base-servlet-common")
     compile "org.activiti:activiti-spring-boot-starter-basic:${activiti_version}"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
 }

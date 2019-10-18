@@ -1,4 +1,4 @@
 spring:
   activiti:
     database-schema-update: false
-    check-process-definitions: false
+    check-process-definitions: true

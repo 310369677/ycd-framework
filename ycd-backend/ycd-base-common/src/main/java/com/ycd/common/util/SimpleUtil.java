@@ -5,7 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 
 public class SimpleUtil {
@@ -109,6 +111,16 @@ public class SimpleUtil {
             return val;
         }
         return defaultVal;
+    }
+
+    public static String formatDate(Date date, String patten) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(patten);
+        return simpleDateFormat.format(date);
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println(formatDate(new Date(), ""));
     }
 
 
